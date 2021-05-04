@@ -12,7 +12,7 @@
 
 <section class="container mb-5 mt-5">
 
-    <h1 class="font-weight-bold text-center mb-3 text-uppercase"> Dodaj kurs </h1>
+    <h1 class="font-weight-bold text-center mb-3 text-uppercase"> Dodaj zespół </h1>
 
     <form action="{{ url('admin/dodaj_zespol') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -23,36 +23,13 @@
         </div>
 
         <div class="form-group">
-            <input class="form-control" name="title1" placeholder="Podtytuł 1" type="text" value="{{ old('title1') }}"
-                required>
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text1" rows="4" placeholder="Tekst do podtytułu 1"
-                value="{{ old('title1') }}" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" name="title2" placeholder="Podtytuł 2" type="text" value="{{ old('title2') }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text2" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ old('text2') }}"></textarea>
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" name="title3" placeholder="Podtytuł 3" type="text" value="{{ old('title3') }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text3" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ old('text3') }}"></textarea>
+            <textarea class="form-control" name="text" rows="4" placeholder="Główny tekst" value="{{ old('text') }}"
+                required></textarea>
         </div>
 
         <div class="form-group">
             <label for="file-input1" class="font-weight-bold">Wybierz zdjęcie 1: </label>
-            <input id="file-input1" type="file" name="zdjecie1">
+            <input id="file-input1" type="file" name="zdjecie1" required>
         </div>
 
         <div class="form-group">

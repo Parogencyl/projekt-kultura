@@ -37,25 +37,11 @@
                 @endfor
         </div>
         <div class="col-md-7 col-12 mb-4">
-            @if (isset($warsztat->title1))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $warsztat->title1 }} </h3>
-            @endif
-            @if (isset($warsztat->text1))
-            <p class="text-justify mb-5" style="font-size: 17px;"> {!! nl2br(e($warsztat->text1)) !!} </p>
-            @endif
+            <p class="text-justify mb-0" style="font-size: 17px;"> {!! nl2br(e($warsztat->text)) !!} </p>
 
-            @if (isset($warsztat->title2))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $warsztat->title2 }} </h3>
-            @endif
-            @if (isset($warsztat->text2))
-            <p class="text-justify mb-5" style="font-size: 17px;"> {!! nl2br(e($warsztat->text2)) !!} </p>
-            @endif
-
-            @if (isset($warsztat->title3))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $warsztat->title3 }} </h3>
-            @endif
-            @if (isset($warsztat->text3))
-            <p class="text-justify" style="font-size: 17px;"> {!! nl2br(e($warsztat->text3)) !!} </p>
+            @if ($warsztat->cena != null)
+            <a class="btn btn-lg btn-success my-5 ml-4" href="{{ url('/warsztaty/zakup/'.$warsztat->nazwa) }}"> KUP
+                {{ $warsztat->cena }} zł </a>
             @endif
 
         </div>

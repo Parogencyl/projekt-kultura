@@ -34,6 +34,7 @@
         @csrf
 
         <input type="hidden" name="id" value="{{ $kurs->id }}">
+        <input type="hidden" name="nameOfCourse" value="{{ $kurs->nazwa }}">
 
         <div class="form-group mb-3">
             <input type="text" class="form-control" name="name" value="{{ $kurs->nazwa }}" placeholder="Nazwa kursu"
@@ -47,15 +48,21 @@
 
         <div class="input-group">
             <input class="form-control" type="text" id="inlineFormInputGroupPrice1" name="price"
-                placeholder="Cena - wariant I" value="{{ $kurs->cena }}" required>
+                placeholder="Cena - wariant 1" value="{{ $kurs->cena }}" required>
             <div class="input-group-prepend">
                 <div class="input-group-text">zł</div>
             </div>
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="input-group">
-            <input class="form-control" type="text" name="price2" placeholder="Cena - wariant II"
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant1" placeholder="Wariant 1 - każdy punkt odzielony znakiem |"
+                value="{{ $kurs->wariant1 }}">
+        </div>
+        <small> Wariant zawiera już Kurs szkoleniowy. </small>
+
+        <div class="input-group mt-2">
+            <input class="form-control" type="text" name="price2" placeholder="Cena - wariant 2"
                 value="{{ $kurs->cena2 }}" required>
             <div class="input-group-prepend">
                 <div class="input-group-text">zł</div>
@@ -63,8 +70,14 @@
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="input-group">
-            <input class="form-control" type="text" name="price3" placeholder="Cena - wariant III"
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant2" placeholder="Wariant 2 - każdy punkt odzielony znakiem |"
+                value="{{ $kurs->wariant2 }}">
+        </div>
+        <small> Wariant zawiera już Kurs szkoleniowy. </small>
+
+        <div class="input-group mt-2">
+            <input class="form-control" type="text" name="price3" placeholder="Cena - wariant 3"
                 value="{{ $kurs->cena3 }}" required>
             <div class="input-group-prepend">
                 <div class="input-group-text">zł</div>
@@ -72,7 +85,13 @@
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="form-group">
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant3" placeholder="Wariant 3 - każdy punkt odzielony znakiem |"
+                value="{{ $kurs->wariant3 }}">
+        </div>
+        <small> Wariant zawiera już Kurs szkoleniowy. </small>
+
+        <div class="form-group mt-2">
             <textarea class="form-control" name="learn" rows="4"
                 placeholder="Czego się nauczysz w kursie (każdy punkt odzielony znakiem | )"
                 value="{{ $kurs->czego_sie_nauczysz }}" required>{{ $kurs->czego_sie_nauczysz }}</textarea>

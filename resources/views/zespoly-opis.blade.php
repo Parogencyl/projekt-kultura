@@ -31,26 +31,7 @@
     <div class="row justify-content-center mb-5">
 
         <div class="col-md-7 col-12 mb-4">
-            @if (isset($zespol->title1))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $zespol->title1 }} </h3>
-            @endif
-            @if (isset($zespol->text1))
-            <p class="text-justify mb-5" style="font-size: 17px;"> {!! nl2br(e($zespol->text1)) !!} </p>
-            @endif
-
-            @if (isset($zespol->title2))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $zespol->title2 }} </h3>
-            @endif
-            @if (isset($zespol->text2))
-            <p class="text-justify mb-5" style="font-size: 17px;"> {!! nl2br(e($zespol->text2)) !!} </p>
-            @endif
-
-            @if (isset($zespol->title3))
-            <h3 class="font-weight-bold" style="font-family: 'Bitter', serif;"> {{ $zespol->title3 }} </h3>
-            @endif
-            @if (isset($zespol->text3))
-            <p class="text-justify" style="font-size: 17px;"> {!! nl2br(e($zespol->text3)) !!} </p>
-            @endif
+            <p class="text-justify mb-5" style="font-size: 17px;"> {!! nl2br(e($zespol->text)) !!} </p>
         </div>
 
         <div class="col-md-5 col-sm-8 col-10 mb-4">

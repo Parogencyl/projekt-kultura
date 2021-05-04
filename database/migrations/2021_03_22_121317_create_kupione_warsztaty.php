@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKupioneTable extends Migration
+class CreateKupioneWarsztaty extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreateKupioneTable extends Migration
      */
     public function up()
     {
-        Schema::create('kupione', function (Blueprint $table) {
+        Schema::create('kupione_warsztaty', function (Blueprint $table) {
             $table->id();
             $table->string('numer_zamowienia');
-            $table->string('kurs');
-            $table->string('wariant');
+            $table->string('warsztat');
             $table->double('cena');
             $table->string('email');
             $table->string('osoba');
             $table->string('telefon');
-            $table->string('potwierdzenie_platnosci');
-            $table->string('firma')->nullable();
-            $table->string('nip')->nullable();
-            $table->string('dane_firmy')->nullable();
             $table->string('czy_zaplacono');
             $table->string('id_sesji');
             $table->timestamp('zakupione')->useCurrent();
@@ -39,6 +34,6 @@ class CreateKupioneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kupione');
+        Schema::dropIfExists('kupione_warsztaty');
     }
 }

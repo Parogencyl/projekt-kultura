@@ -16,41 +16,14 @@ class AdminZespolyController extends Controller
         $fileName2 = $request->file('zdjecie2');
         $fileName3 = $request->file('zdjecie3');
         $fileName4 = $request->file('zdjecie4');
-        $title1 = $request->input('title1');
-        $title2 = $request->input('title2');
-        $title3 = $request->input('title3');
-        $text1 = $request->input('text1');
-        $text2 = $request->input('text2');
-        $text3 = $request->input('text3');
+        $text1 = $request->input('text');
         $id = $request->input('id');
 
         $zespol = DB::table('zespoly')->where('id', $id)->first();
         
         $name = $zespol->nazwa;
         
-        if ($zespol->title1 != $title1 || $zespol->title2 != $title2 || $zespol->title3 != $title3 || $zespol->text1 != $text1 || $zespol->text2 != $text2 || $zespol->text3 != $text3) {
-            if (DB::table('zespoly')->where('id', $id)->update(['title1' => $title1, 'title2' => $title2, 'title3' => $title3, 'text1' => $text1, 'text2' => $text2, 'text3' => $text3])) {
-                if ($fileName != null) {
-                    $nameImage1 = $name."_1.png";
-                    Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName, $nameImage1);
-                }
-                if ($fileName2 != null) {
-                    $nameImage2 = $name."_2.png";
-                    Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName2, $nameImage2);
-                }
-                if ($fileName3 != null) {
-                    $nameImage3 = $name."_3.png";
-                    Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName3, $nameImage3);
-                }
-                if ($fileName4 != null) {
-                    $nameImage4 = $name."_4.png";
-                    Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName4, $nameImage4);
-                }
-                return redirect('/admin/zespoly')->with('success', 'Zespół został zedytowany.');
-            } else {
-                return back()->with('error', 'Nie udało się zedytować zespołu.')->withInput();
-            }
-        } else { 
+        if (DB::table('zespoly')->where('id', $id)->update(['text1' => $text])) {
             if ($fileName != null) {
                 $nameImage1 = $name."_1.png";
                 Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName, $nameImage1);
@@ -68,6 +41,8 @@ class AdminZespolyController extends Controller
                 Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName4, $nameImage4);
             }
             return redirect('/admin/zespoly')->with('success', 'Zespół został zedytowany.');
+        } else {
+            return back()->with('error', 'Nie udało się zedytować zespołu.')->withInput();
         }
         
         return back()->with('error', 'Nie udało się edytować zespołu.')->withInput();
@@ -99,15 +74,10 @@ class AdminZespolyController extends Controller
         $fileName2 = $request->file('zdjecie2');
         $fileName3 = $request->file('zdjecie3');
         $fileName4 = $request->file('zdjecie4');
-        $title1 = $request->input('title1');
-        $title2 = $request->input('title2');
-        $title3 = $request->input('title3');
-        $text1 = $request->input('text1');
-        $text2 = $request->input('text2');
-        $text3 = $request->input('text3');
+        $text1 = $request->input('text');
         $name = $request->input('name');
         
-        if (DB::table('zespoly')->insert(['nazwa' => $name, 'title1' => $title1, 'title2' => $title2, 'title3' => $title3, 'text1' => $text1, 'text2' => $text2, 'text3' => $text3])) {
+        if (DB::table('zespoly')->insert(['nazwa' => $name, 'text' => $text1])) {
             if ($fileName != null) {
                 $nameImage1 = $name."_1.png";
                 Storage::disk('public-graphics')->putFileAs('/zespoly', $fileName, $nameImage1);

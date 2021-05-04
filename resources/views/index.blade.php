@@ -1,5 +1,4 @@
 <?php
-
     $baners = array();
     if($banersFiles = File::allFiles(public_path('graphics/baners'))){
         for ($i=0; $i < count($banersFiles); $i++) { 
@@ -9,7 +8,6 @@
     }
 
     $posts = DB::table('blog')->orderBy('id', 'DESC')->paginate(4);
-
 ?>
 
 @extends('layouts.nav')
@@ -34,7 +32,7 @@
     </div>
     @endif
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="52000">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="12000">
         <ol class="carousel-indicators">
             @if (isset($baners[0]))
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -84,8 +82,7 @@
 
     @if (count($posts))
     <h2 class="font-weight-bold text-center mb-5 text-uppercase font-italic" style="font-family: 'Lora', serif;">
-        Aktualności na
-        blogu </h2>
+        Aktualności </h2>
 
     <div class="row w-xl-75 w-lg-100 mx-auto" id="main">
 

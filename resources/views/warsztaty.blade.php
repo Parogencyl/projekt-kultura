@@ -11,10 +11,10 @@
 
     <h1 class="font-weight-bold text-center mb-3 font-italic" style="font-family: 'Lora', serif;"> WARSZTATY </h1>
 
-    <h3 class="text-center mb-5 font-weight-normal" style="font-family: 'Lora', serif;"> Projekt kultura zajmuje się
-        także
-        prowadzeniej warsztatów zarówno dla młodzieży jak i
-        dorosłych.</h3>
+    <h3 class="text-center mb-5 font-weight-normal" style="font-family: 'Lora', serif;"> Stowarzyszenie Inicjatyw
+        Społecznych „PROJEKT KULTURA” to także warsztaty dla dzieci i
+        młodzieży. Zachęcamy do zapoznania się z naszą ofertą.
+    </h3>
 
     <div class="row mb-5" id="main">
 

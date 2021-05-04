@@ -27,8 +27,8 @@
 
     <h1 class="font-weight-bold text-center mb-3"> Warsztaty </h1>
 
-    <h4 class="text-center mb-5"> Projekt kultura zajmuje się także prowadzeniej warsztatów zarówno dla młodzieży jak i
-        dorosłych.</h4>
+    <h4 class="text-center mb-5"> Stowarzyszenie Inicjatyw Społecznych „PROJEKT KULTURA” to także warsztaty dla dzieci i
+        młodzieży. Zachęcamy do zapoznania się z naszą ofertą.</h4>
 
     <div class="row justify-content-center">
         <a href="{{ url('/admin/dodaj_warsztat') }}" class="btn btn-lg btn-success mb-5 mt-2"> DODAJ NOWE

@@ -7,11 +7,16 @@
             <div class="card">
                 <div class="card-header">Resetuj hasło</div>
 
-                <div class="card-body">
-                    <form method="POST" action="">
-                        @csrf
+                @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block col-12 my-3 mb-5">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                <div class="card-body">
+                    <form method="POST" action="{{ url('/admin/resetuj_haslo') }}">
+                        @csrf
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>

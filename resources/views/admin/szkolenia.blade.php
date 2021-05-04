@@ -44,9 +44,9 @@
 
     <h1 class="font-weight-bold text-center mb-3"> Szkolenia </h1>
 
-    <h4 class="text-center mb-5"> Projekt kultura oferuje kursy szkoleniowe pozwalające na poszerzenie wiedzy w
-        dziedzinie
-        ...
+    <h4 class="text-center mb-5"> Stowarzyszenie Inicjatyw Społecznych „PROJEKT
+        KULTURA” zaprasza do udziału w
+        szkoleniach dla kadr kultury i organizacji pozarządowych.
     </h4>
 
     <div class="row justify-content-center">
@@ -165,7 +165,6 @@
                             <li class="list-group-item font-weight-normal text-center">Kurs w postaci
                                 filmu</li>
                             <li class="list-group-item font-weight-normal text-center"> X </li>
-                            <li class="list-group-item font-weight-normal text-center"> X </li>
                             <li class="list-group-item text-center text-danger" style="font-size: 22px;">
                                 {{ $item->cena }}zł </li>
                         </ul>
@@ -189,7 +188,6 @@
                             <li class="list-group-item font-weight-normal text-center"> Odpowiedź na 3
                                 dodatkowe pytania
                             </li>
-                            <li class="list-group-item font-weight-normal text-center"> X </li>
                             <li class="list-group-item text-center text-danger" style="font-size: 22px;">
                                 {{ $item->cena2 }}zł </li>
                         </ul>
@@ -209,8 +207,6 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item font-weight-normal text-center">Kurs w postaci
                                 filmu</li>
-                            <li class="list-group-item font-weight-normal text-center"> Odpowiedź na 3
-                                dodatkowe pytania
                             </li>
                             <li class="list-group-item font-weight-normal text-center"> Szczegółowa
                                 analiza wniosku

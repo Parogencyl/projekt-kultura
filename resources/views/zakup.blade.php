@@ -3,6 +3,15 @@
 
     $kurs = DB::table('kursy')->where('nazwa', $nazwa)->first();
 
+    for($i = 1; $i < 4; $i++){
+        $w = "wariant".$i;
+        if($kurs->$w != null){
+            if(strpos($kurs->$w, '|')){
+                $kurs->$w = str_replace('|', ' + ', $kurs->$w);
+            }
+        }
+    }
+
 ?>
 
 @extends('layouts.nav')
@@ -86,17 +95,9 @@
             <p class="font-weight-bold mb-2" style="font-size: 17px" style="font-family: 'Bitter', serif;">
                 Potwierdzenie zakupu: </p>
 
-            <div class="custom-control custom-radio mb-2 ml-4">
-                <input class="custom-control-input" type="radio" name="faktura" id="Radios1" value="paragon"
-                    onchange="showFaktura(this)" checked>
-                <label class="custom-control-label" for="Radios1">
-                    Paragon
-                </label>
-            </div>
-
             <div class="custom-control custom-radio mb-3 ml-4">
-                <input class="custom-control-input" type="radio" name="faktura" id="Radios2" value="faktura"
-                    onchange="showFaktura(this)">
+                <input class="custom-control-input" type="checkbox" name="faktura" id="Radios2" value="faktura"
+                    onchange="showFaktura()">
                 <label class="custom-control-label" for="Radios2">
                     Faktura VAT
                 </label>
@@ -107,7 +108,7 @@
                 <div class="form-group mb-3 ml-2">
                     <div>
                         <input id="company" type="text" class="form-control @error('company') is-invalid @enderror"
-                            name="company" autocomplete="company" value="{{ old('company') }}" placeholder="Firma *">
+                            name="company" autocomplete="company" value="{{ old('company') }}" placeholder="Firma">
                         @error('company')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -117,7 +118,7 @@
                 <div class="form-group mb-3 ml-2">
                     <div>
                         <input id="nip" type="text" class="form-control @error('nip') is-invalid @enderror" name="nip"
-                            autocomplete="nip" value="{{ old('nip') }}" placeholder="Nip *">
+                            autocomplete="nip" value="{{ old('nip') }}" placeholder="Nip">
                         @error('nip')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -174,9 +175,9 @@
                 <input class="custom-control-input wariant" type="radio" onclick="change({{$kurs->cena}})"
                     name="wariant" id="Radio1" value="1" checked>
                 <label class="custom-control-label" for="Radio1">
-                    Wariant 1 - SZKOLENIE ( <span class="text-danger font-weight-bold"
-                        style="font-family: 'Bitter', serif;"> {{$kurs->cena}} zł
-                    </span>)
+                    <b> Wariant 1 </b> - FILM SZKOLENIOWY <?php echo $kurs->wariant1 ? '+ '.$kurs->wariant1 : '' ?>
+                    (<span class="text-danger font-weight-bold" style="font-family: 'Bitter', serif;">{{$kurs->cena}}
+                        zł</span>)
                 </label>
             </div>
 
@@ -184,9 +185,9 @@
                 <input class="custom-control-input wariant" type="radio" name="wariant" id="Radio2"
                     onclick="change({{$kurs->cena2}})" value="2">
                 <label class="custom-control-label" for="Radio2">
-                    Wariant 2 - SZKOLENIE + trzy konkretne pytania dotyczące Twojego wniosku ( <span
-                        class="text-danger font-weight-bold" style="font-family: 'Bitter', serif;"> {{$kurs->cena2}} zł
-                    </span>)
+                    <b> Wariant 2 </b> - FILM SZKOLENIOWY <?php echo $kurs->wariant2 ? '+ '.$kurs->wariant2 : '' ?>
+                    (<span class="text-danger font-weight-bold" style="font-family: 'Bitter', serif;">{{$kurs->cena2}}
+                        zł</span>)
                 </label>
             </div>
 
@@ -194,9 +195,9 @@
                 <input class="custom-control-input wariant" type="radio" name="wariant"
                     onclick="change({{$kurs->cena3}})" id="Radio3" value="3">
                 <label class="custom-control-label" for="Radio3">
-                    Wariant 3 - SZKOLENIE + szczegółowa analiza Twojego wniosku ( <span
-                        class="text-danger font-weight-bold" style="font-family: 'Bitter', serif;">
-                        {{$kurs->cena3}} zł </span>)
+                    <b> Wariant 3 </b> - FILM SZKOLENIOWY <?php echo $kurs->wariant3 ? '+ '.$kurs->wariant3 : '' ?>
+                    (<span class="text-danger font-weight-bold" style="font-family: 'Bitter', serif;">{{$kurs->cena3}}
+                        zł</span>)
                 </label>
             </div>
 
@@ -206,11 +207,10 @@
                 (nagranie) pt.
                 {{$kurs->nazwa}}
             </p>
-            <p class="mb-2 text-justify"> Po dokonaniu płatności otrzymasz na wskazany adres e-mail.: potwierdzenie
-                przesłania
-                zgłoszenia wraz z
-                fakturą proforma/paragonem; klucz umożliwiający przejście do szkolenia (nagrania), który należy wpisać w
-                zakładce Szkolenia pod zakupionym kursem. </p>
+            <p class="mb-2 text-justify"> Po zatwierdzeniu płatności otrzymasz na wskazany adres e-mail klucz,
+                umożliwiający przejście do szkolenia (nagrania), który należy wpisać w
+                zakładce Szkolenia pod zakupionym kursem. Klucz aktywny jest 10 dni od daty zaksięgowania płatności.
+            </p>
             <p class="text-justify"> Wypełniając formularz upoważniasz Stowarzyszenie Inicjatyw Społecznych "PROJEKT
                 KULTURA", ul. Ceramików
                 25, 68-130 Gozdnica, NIP: 9241916159, do wystawienia faktury bez podpisu nabywcy. </p>
@@ -225,7 +225,8 @@
                     zgodę na
                     przetwarzanie danych osobowych w celu wykonania umowy. Administratorem danych osobowych jest
                     Stowarzyszenie Inicjatyw Społecznych "PROJEKT KULTURA", ul. Ceramików 25, 68-130 Gozdnica, NIP:
-                    9241916159. W związku ze zgłoszeniem Pani/Pana do udziału w szkoleniu, informujemy iż:
+                    9241916159, REGON: 387060723. W związku ze zgłoszeniem Pani/Pana do udziału w szkoleniu, informujemy
+                    iż:
                     Administratorem Pani/Pana danych osobowych jest Stowarzyszenie Inicjatyw Społecznych "PROJEKT
                     KULTURA" („Administrator”)<span id="rodo">...<span class="font-weight-bold"> Więcej </span></span>
                 </label>
@@ -233,6 +234,10 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <input type="hidden" name="p24_merchant_id" value="142447" />
+            <input type="hidden" name="p24_pos_id" value="142447" />
+            <input type="hidden" name="p24_amount" id="p24_priceToPay" value="{{ ($kurs->cena)*100 }}" />
 
             <div class="row justify-content-center mt-4 pt-2">
                 <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Bitter', serif;"
@@ -252,10 +257,11 @@
         document.getElementById('buyButton').innerHTML = 'ZAKUP KURS - '+price+' zł'; 
         document.getElementById('priceToPay').innerHTML = price; 
         document.getElementById('priceToPay').value = price; 
+        document.getElementById('p24_priceToPay').value = price*100; 
     }
 
-    function showFaktura(checkbox){
-        if(checkbox.id == 'Radios2'){
+    function showFaktura(){
+        if(document.getElementById('Radios2').checked == true){
             document.getElementById('faktura').style.display = 'block';
             document.getElementById('form').action = '/summaryOrderFaktura';
         }else{

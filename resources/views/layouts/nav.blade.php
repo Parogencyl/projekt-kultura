@@ -7,11 +7,19 @@
 
     <link rel="shortcut icon" href="{{ asset('/graphics/Logo.png') }}" />
 
-    <meta name="description" content="" />
     <meta name="author" content="Damian Bohonos" />
     <meta name="copyright" content="Copyright owner" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="Stowarzyszenie Inicjatyw Społecznych „PROJEKT KULTURA” powstało w 2020 r. Pomysł na jego utworzenie zrodził się jednak w 
+        głowach i sercach ludzi, którzy wspólnie działają od wielu lat. Reprezentujemy różne środowiska i posiadamy różne umiejętności, ale 
+        w połączeniu z łatwością realizujemy stawiane sobie cele. Jesteśmy nastawieni na popularyzowanie rozwoju osobistego, propagowanie 
+        wszelkich form aktywności intelektualnych, kulturalnych i fizycznych, udział w akcjach społecznych i charytatywnych, organizowanie 
+        wydarzeń kulturalnych i kształtowanie postaw proekologicznych. Organizujemy warsztaty dla dzieci i młodzieży:
+        Naszym HITEM są WARSZTATY CERAMICZNE, których zorganizowaliśmy całe mnóstwo. Posiadamy własne koła garncarskie (tradycyjne i elektryczne), 
+        piec do wypału ceramiki techniką RAKU oraz wszystkie niezbędne przyrządy do pracy w glinie." />
+    <meta name="keywords" content="Projekt kultura, szkolenia, nauka, warsztaty, zespoły" />
     <meta name="robots" content="follow" />
+
+    <meta name="google-site-verification" content="2UHmuFwTbqyTG8KVboHHOsoxTZ-WkHF3pNROuCPr-Os" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -30,6 +38,7 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -93,7 +102,7 @@
                     <i class="fab fa-facebook-square"></i>
                 </a>
                 <div class="line"> </div>
-                <a href="#" class="mx-4 inst" target="_blank">
+                <a href="https://www.instagram.com/projekt_kultura/?hl=pl" class="mx-4 inst" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
                 <div class="line"> </div>
@@ -102,6 +111,8 @@
                 </a>
             </div>
         </div>
+        <p class="mb-0 text-center text-dark font-weight-bold"> <a href="/regulamin" class="text-decoration-none">
+                Regulamin </a> serwisu projekt-kultura. </p>
         <p class="mb-0 text-center text-dark font-weight-bold"> Copyright 2021. Wszelkie prawa zastrzeżone. </p>
     </footer>
 </body>

@@ -38,33 +38,8 @@
         </div>
 
         <div class="form-group">
-            <input class="form-control" name="title1" placeholder="Podtytuł 1" type="text" value="{{ $zespol->title1 }}"
-                required>
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text1" rows="4" placeholder="Tekst do podtytułu 1"
-                value="{{ $zespol->text1 }}" required>{{ $zespol->text1 }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" name="title2" placeholder="Podtytuł 2" type="text"
-                value="{{ $zespol->title2 }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text2" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ $zespol->text2 }}">{{ $zespol->text2 }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" name="title3" placeholder="Podtytuł 3" type="text"
-                value="{{ $zespol->title3 }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text3" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ $zespol->text3 }}">{{ $zespol->text3 }}</textarea>
+            <textarea class="form-control" name="text" rows="4" placeholder="Główny tekst" value="{{ $zespol->text }}"
+                required>{{ $zespol->text }}</textarea>
         </div>
 
         <div class="form-group">

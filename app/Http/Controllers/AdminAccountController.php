@@ -49,12 +49,33 @@ class AdminAccountController extends Controller
 
         public function logout(Request $request){
             Auth::logout();
-
+            
             $request->session()->invalidate();
-
+            
             $request->session()->regenerateToken();
-
+            
             return redirect('/admin');
+        }
+        
+        public function resetPassword(Request $request){
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $passwordConfirm = $request->input('password_confirmation');
+
+            if ($password != $passwordConfirm) {
+                return back()->with('error', 'Podane hasła się nie zgadzają.');
+            }
+
+            if(DB::table('users')->where('email', $email)->update(['password' => Hash::make($request->input('password'))])){
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                
+                return redirect('/admin');
+            } else {
+                return back()->with('error', 'Coś poszło nie tak.')->withInput();
+            }
+
         }
     
 }

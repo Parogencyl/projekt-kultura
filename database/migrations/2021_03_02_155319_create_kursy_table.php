@@ -20,6 +20,9 @@ class CreateKursyTable extends Migration
             $table->double('cena');
             $table->double('cena2');
             $table->double('cena3');
+            $table->text('wariant1');
+            $table->text('wariant2');
+            $table->text('wariant3');
             $table->timestamp('aktualizacja')->useCurrent();
             $table->text('czego_sie_nauczysz');
         });

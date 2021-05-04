@@ -16,41 +16,22 @@ class AdminWarsztatyController extends Controller
         $fileName2 = $request->file('zdjecie2');
         $fileName3 = $request->file('zdjecie3');
         $fileName4 = $request->file('zdjecie4');
-        $title1 = $request->input('title1');
-        $title2 = $request->input('title2');
-        $title3 = $request->input('title3');
-        $text1 = $request->input('text1');
-        $text2 = $request->input('text2');
-        $text3 = $request->input('text3');
+        $text1 = $request->input('text');
+        $czySprzedawac = $request->input('czy_sprzedawac');
+        $price = $request->input('price');
         $id = $request->input('id');
+
+        if ($czySprzedawac == null) {
+            $czySprzedawac = 0;
+        }else {
+            $czySprzedawac = 1;
+        }
 
         $warsztat = DB::table('warsztaty')->where('id', $id)->first();
         
         $name = $warsztat->nazwa;
         
-        if ($warsztat->title1 != $title1 || $warsztat->title2 != $title2 || $warsztat->title3 != $title3 || $warsztat->text1 != $text1 || $warsztat->text2 != $text2 || $warsztat->text3 != $text3) {
-            if (DB::table('warsztaty')->where('id', $id)->update(['title1' => $title1, 'title2' => $title2, 'title3' => $title3, 'text1' => $text1, 'text2' => $text2, 'text3' => $text3])) {
-                if ($fileName != null) {
-                    $nameImage1 = $name."_1.png";
-                    Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName, $nameImage1);
-                }
-                if ($fileName2 != null) {
-                    $nameImage2 = $name."_2.png";
-                    Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName2, $nameImage2);
-                }
-                if ($fileName3 != null) {
-                    $nameImage3 = $name."_3.png";
-                    Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName3, $nameImage3);
-                }
-                if ($fileName4 != null) {
-                    $nameImage4 = $name."_4.png";
-                    Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName4, $nameImage4);
-                }
-                return redirect('/admin/warsztaty')->with('success', 'Warsztat został zedytowany.');
-            } else {
-                return back()->with('error', 'Nie udało się zedytować warsztatu.')->withInput();
-            }
-        } else { 
+        if (DB::table('warsztaty')->where('id', $id)->update(['text' => $text1, 'czy_sprzedac' => $czySprzedawac, 'cena' => $price])) {
             if ($fileName != null) {
                 $nameImage1 = $name."_1.png";
                 Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName, $nameImage1);
@@ -68,6 +49,8 @@ class AdminWarsztatyController extends Controller
                 Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName4, $nameImage4);
             }
             return redirect('/admin/warsztaty')->with('success', 'Warsztat został zedytowany.');
+        } else {
+            return back()->with('error', 'Nie udało się zedytować warsztatu.')->withInput();
         }
         
         return back()->with('error', 'Nie udało się edytować warsztatu.')->withInput();
@@ -99,15 +82,18 @@ class AdminWarsztatyController extends Controller
         $fileName2 = $request->file('zdjecie2');
         $fileName3 = $request->file('zdjecie3');
         $fileName4 = $request->file('zdjecie4');
-        $title1 = $request->input('title1');
-        $title2 = $request->input('title2');
-        $title3 = $request->input('title3');
-        $text1 = $request->input('text1');
-        $text2 = $request->input('text2');
-        $text3 = $request->input('text3');
+        $text1 = $request->input('text');
+        $czySprzedawac = $request->input('czy_sprzedawac');
         $name = $request->input('name');
+        $price = $request->input('price');
+
+        if ($czySprzedawac == null) {
+            $czySprzedawac = 0;
+        }else {
+            $czySprzedawac = 1;
+        }
         
-        if (DB::table('warsztaty')->insert(['nazwa' => $name, 'title1' => $title1, 'title2' => $title2, 'title3' => $title3, 'text1' => $text1, 'text2' => $text2, 'text3' => $text3])) {
+        if (DB::table('warsztaty')->insert(['nazwa' => $name, 'text' => $text1, 'czy_sprzedac' => $czySprzedawac, 'cena' => $price])) {
             if ($fileName != null) {
                 $nameImage1 = $name."_1.png";
                 Storage::disk('public-graphics')->putFileAs('/warsztaty', $fileName, $nameImage1);

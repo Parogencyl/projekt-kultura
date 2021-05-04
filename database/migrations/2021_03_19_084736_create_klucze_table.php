@@ -15,12 +15,12 @@ class CreateKluczeTable extends Migration
     {
         Schema::create('klucze', function (Blueprint $table) {
             $table->id();
-            $table->string('imie');
-            $table->string('nazwisko');
+            $table->string('osoba');
             $table->string('email');
-            $table->unsignedBigInteger('kurs');
-            $table->foreign('kurs')->references('id')->on('kursy');
+            $table->string('kurs');
+            $table->integer('wariant');
             $table->string('klucz');
+            $table->string('zamowienie');
             $table->timestamp('utworzone')->useCurrent();
         });
     }

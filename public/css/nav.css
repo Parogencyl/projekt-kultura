@@ -2,6 +2,7 @@ ul {
     font-size: 18px;
     font-weight: bold;
 }
+
 a {
     text-decoration: none;
     color: black;
@@ -56,6 +57,12 @@ nav ul {
 
 .social .yt:hover {
     color: red;
+}
+
+.line {
+    height: 60px;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: 768px) {

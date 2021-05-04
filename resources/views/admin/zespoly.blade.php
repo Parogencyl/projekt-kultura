@@ -11,7 +11,8 @@
 
     <h1 class="font-weight-bold text-center mb-3"> Zespoły </h1>
 
-    <h4 class="text-center mb-5"> W skład Projekt kultura wchodzi wiele zespołów. </h4>
+    <h4 class="text-center mb-5"> Przyjaciele Stowarzyszenia Inicjatyw Społecznych „PROJEKT KULTURA” to naprawdę
+        utalentowane osoby. Możecie się o tym przekonać zapraszając ich na swoje wydarzenie. </h4>
 
     <div class="row justify-content-center">
         <a href="{{ url('/admin/dodaj_zespol') }}" class="btn btn-lg btn-success mb-5 mt-2"> DODAJ NOWE

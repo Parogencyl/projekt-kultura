@@ -40,33 +40,18 @@
         </div>
 
         <div class="form-group">
-            <input class="form-control" name="title1" placeholder="Podtytuł 1" type="text"
-                value="{{ $warsztat->title1 }}" required>
+            <textarea class="form-control" name="text" rows="4" placeholder="Główny tekst" value="{{ $warsztat->text }}"
+                required>{{ $warsztat->text }}</textarea>
         </div>
 
-        <div class="form-group">
-            <textarea class="form-control" name="text1" rows="4" placeholder="Tekst do podtytułu 1"
-                value="{{ $warsztat->text1 }}" required>{{ $warsztat->text1 }}</textarea>
+        <div class="form-check mb-4">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="czy_sprzedawac">
+            <label class="form-check-label" for="exampleCheck1">Czy sprzedawać</label>
         </div>
 
-        <div class="form-group">
-            <input class="form-control" name="title2" placeholder="Podtytuł 2" type="text"
-                value="{{ $warsztat->title2 }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text2" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ $warsztat->text2 }}">{{ $warsztat->text2 }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" name="title3" placeholder="Podtytuł 3" type="text"
-                value="{{ $warsztat->title3 }}">
-        </div>
-
-        <div class="form-group">
-            <textarea class="form-control" name="text3" rows="4" placeholder="Tekst do podytułu 2"
-                value="{{ $warsztat->text3 }}">{{ $warsztat->text3 }}</textarea>
+        <div class="form-group mb-3">
+            <input type="text" class="form-control" name="price" value="{{ $warsztat->cena }}"
+                placeholder="Cena warsztatu">
         </div>
 
         <div class="form-group">

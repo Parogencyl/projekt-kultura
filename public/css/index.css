@@ -32,12 +32,6 @@
     justify-content: space-evenly;
 }
 
-.line {
-    height: 60px;
-    width: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
 form img {
     max-height: 400px;
     object-fit: cover;
@@ -73,7 +67,7 @@ form img {
     }
 }
 
-.image-upload > input {
+.image-upload>input {
     display: none;
 }
 
@@ -95,15 +89,15 @@ form img {
     color: red;
 }
 
-#pagination > nav > div > div > p {
+#pagination>nav>div>div>p {
     display: none;
 }
 
-#pagination > nav > div > span {
+#pagination>nav>div>span {
     display: none;
 }
 
-#pagination > nav > div > a {
+#pagination>nav>div>a {
     display: none;
 }
 
@@ -111,25 +105,26 @@ form img {
     width: 25px;
     display: inline-block;
 }
-#pagination span > span > span {
+
+#pagination span>span>span {
     color: white;
     background-color: rgb(73, 73, 73) !important;
 }
 
-#pagination span > span[aria-current="page"] > span {
+#pagination span>span[aria-current="page"]>span {
     color: white;
     background-color: rgb(45, 177, 67) !important;
     font-weight: bold;
     margin-right: -3px;
 }
 
-#pagination div > span > a {
+#pagination div>span>a {
     color: white;
     background-color: rgb(73, 73, 73) !important;
     transition: 0.4s;
 }
 
-#pagination div > span > a:hover {
+#pagination div>span>a:hover {
     color: white;
     background-color: rgb(109, 109, 109) !important;
 }

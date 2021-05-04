@@ -38,7 +38,7 @@
 
 <body class="d-flex flex-column min-vh-100">
     <div id="app">
-        <nav class="navbar navbar-expand-md bg-white shadow py-0 sticky-top">
+        <nav class="navbar navbar-expand-md bg-white shadow py-0 sticky-top px-0">
             <div class="container">
                 <a class="navbar-brand py-0" href="{{ url('/') }}">
                     <img src="{{ asset('/graphics/Logo.png') }}" style="height: 80px">
@@ -69,6 +69,9 @@
                         </li>
                         <li class="nav-item text-md-left text-center mr-2">
                             <a class="nav-link pb-1" href="{{ url('admin/zespoly') }}"> Zespoły </a>
+                        </li>
+                        <li class="nav-item text-md-left text-center mr-2">
+                            <a class="nav-link pb-1" href="{{ url('admin/zamowienia') }}"> Zamówienia </a>
                         </li>
                         <li class="nav-item text-md-left text-center mr-2">
                             <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST">

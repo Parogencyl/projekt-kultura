@@ -11,8 +11,9 @@
 
     <h1 class="font-weight-bold text-center mb-3 font-italic" style="font-family: 'Lora', serif;"> ZESPOŁY </h1>
 
-    <h3 class="text-center mb-5 font-weight-normal" style="font-family: 'Lora', serif;"> W skład Projekt kultura wchodzi
-        wiele zespołów. </h3>
+    <h3 class="text-center mb-5 font-weight-normal" style="font-family: 'Lora', serif;"> Przyjaciele Stowarzyszenia
+        Inicjatyw Społecznych „PROJEKT KULTURA” to naprawdę
+        utalentowane osoby. Możecie się o tym przekonać zapraszając ich na swoje wydarzenie. </h3>
 
     <div class="row mb-5" id="main">
 

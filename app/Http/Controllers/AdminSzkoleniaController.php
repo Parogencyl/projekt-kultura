@@ -37,6 +37,9 @@ class AdminSzkoleniaController extends Controller
         $price = $request->input('price');
         $price2 = $request->input('price2');
         $price3 = $request->input('price3');
+        $wariant1 = $request->input('wariant1');
+        $wariant2 = $request->input('wariant2');
+        $wariant3 = $request->input('wariant3');
         $learn = $request->input('learn');
         $id = $request->input('id');
 
@@ -44,8 +47,8 @@ class AdminSzkoleniaController extends Controller
         
         $name = $kurs->nazwa;
         
-        if ($kurs->laczny_czas != $time || $kurs->cena != $price || $kurs->cena2 != $price2 || $kurs->cena3 != $price3 || $kurs->czego_sie_nauczysz != $learn) {
-            if (DB::table('kursy')->where('id', $id)->update(['laczny_czas' => $time, 'cena' => $price, 'cena2' => $price2, 'cena3' => $price3, 'czego_sie_nauczysz' => $learn])) {
+        if ($kurs->laczny_czas != $time || $kurs->cena != $price || $kurs->cena2 != $price2 || $kurs->cena3 != $price3 || $kurs->czego_sie_nauczysz != $learn || $kurs->wariant1 != $wariant1  || $kurs->wariant2 != $wariant2 || $kurs->wariant3 != $wariant3) {
+            if (DB::table('kursy')->where('id', $id)->update(['laczny_czas' => $time, 'cena' => $price, 'cena2' => $price2, 'cena3' => $price3, 'czego_sie_nauczysz' => $learn, 'wariant1' => $wariant1, 'wariant2' => $wariant2, 'wariant3' => $wariant3])) {
                 if ($fileName != null) {
                     $nameVideo = $name."_zwiastun.mp4";
                     Storage::disk('public-graphics')->putFileAs('/kursy', $fileName, $nameVideo);
@@ -68,7 +71,7 @@ class AdminSzkoleniaController extends Controller
 
         case 'delete':
             $id = $request->input('id');
-            $name = $request->input('name');
+            $name = $request->input('nameOfCourse');
             
             DB::table('klucze')->where('kurs', $id)->delete();
             if(DB::table('kursy')->where('id', $id)->delete()){
@@ -102,12 +105,15 @@ class AdminSzkoleniaController extends Controller
         $price = $request->input('price');
         $price2 = $request->input('price2');
         $price3 = $request->input('price3');
+        $wariant1 = $request->input('wariant1');
+        $wariant2 = $request->input('wariant2');
+        $wariant3 = $request->input('wariant3');
         $learn = $request->input('learn');
 
         $nameZwiastun = $name."_zwiastun.mp4";
 
         if(Storage::disk('public-graphics')->putFileAs('/kursy', $fileName, $nameZwiastun)){
-            if (DB::table('kursy')->insert(['nazwa' => $name, 'laczny_czas' => $time, 'cena' => $price, 'cena2' => $price2, 'cena3' => $price3, 'czego_sie_nauczysz' => $learn])) {
+            if (DB::table('kursy')->insert(['nazwa' => $name, 'laczny_czas' => $time, 'cena' => $price, 'cena2' => $price2, 'cena3' => $price3, 'czego_sie_nauczysz' => $learn, 'wariant1' => $wariant1, 'wariant2' => $wariant2, 'wariant3' => $wariant3])) {
                 return redirect('/admin/szkolenia')->with('success', 'Kurs został dodany.');
             } else {
                 return back()->with('error', 'Nie udało się zapisać kursu.')->withInput();

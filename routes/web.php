@@ -34,6 +34,9 @@ Route::get('/zespoly/{nazwa}', function () {
 Route::get('/poznaj-nas', function () {
     return view('poznaj_nas');
 });
+Route::get('/regulamin', function () {
+    return view('regulamin');
+});
 Route::get('/szkolenia/kurs', function () {
     if(session()->get('kurs')){
         return view('kurs');
@@ -45,7 +48,16 @@ Route::get('/szkolenia/kurs', function () {
 Route::get('/zakup/{nazwa}', function () {
     return view('zakup');
 });
+
+Route::get('/warsztaty/zakup/{nazwa}', function () {
+    return view('zakupWarsztat');
+});
+
+Route::post('/przelew/weryfikacja/warsztat', [App\Http\Controllers\PrzelewyController::class, 'verifyPaymentWarsztat']);
+Route::post('/przelew/weryfikacja/kurs', [App\Http\Controllers\PrzelewyController::class, 'verifyPaymentKurs']);
+
 Route::post('/zakup/sprawdzenie', [App\Http\Controllers\BuyFormController::class, 'validation']);
+Route::post('/warsztaty/zakup/sprawdzenie', [App\Http\Controllers\BuyFormController::class, 'validationWarsztaty']);
 
 Route::post('/blog/blogPost', [App\Http\Controllers\AdminAktualnosciController::class, 'blogPost']);
 Route::get('/blog/{tutul}', function () {
@@ -53,10 +65,10 @@ Route::get('/blog/{tutul}', function () {
 });
 
 Route::post('/szkolenia/checkKey', [App\Http\Controllers\KursyController::class, 'goToKurs']);
+Route::post('/szkolenia/generate', [App\Http\Controllers\KursyController::class, 'generateKey']);
 
 
 Auth::routes();
-
 
 Route::get('/admin', function () {
     if(Auth::id()){
@@ -68,11 +80,12 @@ Route::get('/admin', function () {
 
 Route::get('/admin/rejestracja', function () {
     return view('auth/register');
-})->middleware('auth');
+});
 
 Route::get('/admin/resetuj_haslo', function () {
-    return view('auth/password/reset');
+    return view('auth/passwords/reset');
 })->middleware('auth');
+Route::post('/admin/resetuj_haslo', [App\Http\Controllers\AdminAccountController::class, 'resetPassword']);
 
 Route::get('/admin/szkolenia', function () {
     return view('admin/szkolenia');
@@ -84,6 +97,18 @@ Route::get('/admin/warsztaty', function () {
 
 Route::get('/admin/zespoly', function () {
     return view('admin/zespoly');
+})->middleware('auth');
+
+Route::get('/admin/zamowienia', function () {
+    return view('admin/zamowienia');
+})->middleware('auth');
+
+Route::get('/admin/zamowienia/warsztaty', function () {
+    return view('admin/zamowieniaWarsztaty');
+})->middleware('auth');
+
+Route::get('/admin/zamowienia/kursy', function () {
+    return view('admin/zamowieniaKursy');
 })->middleware('auth');
 
 Route::get('/admin/dodaj_post', function () {
@@ -139,5 +164,9 @@ Route::post('/admin/dodaj_warsztat', [App\Http\Controllers\AdminWarsztatyControl
 Route::post('/admin/edytuj_zespol', [App\Http\Controllers\AdminZespolyController::class, 'editZespoly']);
 Route::post('/admin/dodaj_zespol', [App\Http\Controllers\AdminZespolyController::class, 'addZespoly']);
 Route::post('/admin/dodaj_film', [App\Http\Controllers\AdminSzkoleniaController::class, 'addMainVideo']);
+Route::post('/admin/generateKey', [App\Http\Controllers\KursyController::class, 'generateKey']);
+
+
+Route::get('mail/send', [App\Http\Controllers\MailController::class, 'send']);
 
 

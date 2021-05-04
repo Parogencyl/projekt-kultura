@@ -43,25 +43,43 @@
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="input-group">
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant1" placeholder="Wariant 1 - każdy punkt odzielony znakiem |"
+                value="{{ old('wariant1') }}">
+        </div>
+        <small> Wariant zawiera już film z kursem szkoleniowy. </small>
+
+        <div class="input-group mt-2">
             <input class="form-control" type="text" name="price2" placeholder="Cena - wariant II"
-                value="{{ old('price2') }}" required>
+                value="{{ old('price2') }}">
             <div class="input-group-prepend">
                 <div class="input-group-text">zł</div>
             </div>
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="input-group">
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant2" placeholder="Wariant 2 - każdy punkt odzielony znakiem |"
+                value="{{ old('wariant2') }}">
+        </div>
+        <small> Wariant zawiera już film z kursem szkoleniowy. </small>
+
+        <div class="input-group mt-2">
             <input class="form-control" type="text" name="price3" placeholder="Cena - wariant III"
-                value="{{ old('price3') }}" required>
+                value="{{ old('price3') }}">
             <div class="input-group-prepend">
                 <div class="input-group-text">zł</div>
             </div>
         </div>
         <small> Grosze należy podać po znaku . (199.99) </small>
 
-        <div class="form-group">
+        <div class="form-group mb-0 mt-2">
+            <input class="form-control" name="wariant3" placeholder="Wariant 3 - każdy punkt odzielony znakiem |"
+                value="{{ old('wariant3') }}">
+        </div>
+        <small> Wariant zawiera już film z kursem szkoleniowy. </small>
+
+        <div class="form-group mt-2">
             <textarea class="form-control" name="learn" rows="4"
                 placeholder="Czego się nauczysz w kursie (każdy punkt odzielony znakiem | )" value="{{ old('learn') }}"
                 required>{{ old('learn') }}</textarea>
@@ -69,7 +87,7 @@
 
         <div class="form-group">
             <label for="file-input2" class="font-weight-bold">Wybierz zwiastun: </label>
-            <input id="file-input2" type="file" name="videoZwiastun">
+            <input id="file-input2" type="file" name="videoZwiastun" required>
         </div>
 
         <div class="row justify-content-center">

@@ -17,7 +17,89 @@
         }
     }
 
+    class Wariant {
+        public $wariant1;
+        public $wariant2;
+        public $wariant3;
+    }
+
+    $warianty = array();
+    $wariantySize = array();
+
+    foreach ($kursy as $item) {
+        $wariant = New Wariant();
+        $text = array();
+        if ($item->wariant1 == null) {
+            $wariant->wariant1 = null;
+        }else if(strpos($item->wariant1, '|')){
+            $war = $item->wariant1;
+            for ($i=0; $i < substr_count($item->wariant1, '|')+1; $i++) { 
+                $pos = strpos($war, '|');
+                $text[] = substr($war, $pos);
+                $war = str_replace($war, '', 0, $pos);
+            }
+            $wariant->wariant1 = $text;
+        }else {
+            $wariant->wariant1 = $item->wariant1;
+        }
+
+        if ($item->wariant2 == null) {
+            $wariant->wariant2 = null;
+        }else if(strpos($item->wariant2, '|')){
+            $war = $item->wariant2;
+            for ($i=0; $i < substr_count($item->wariant2, '|')+1; $i++) { 
+                $pos = strpos($war, '|');
+                $text[] = substr($war, $pos);
+                $war = str_replace($war, '', 0, $pos);
+            }
+            $wariant->wariant2 = $text;
+        }else {
+            $wariant->wariant2 = $item->wariant2;
+        }
+
+        if ($item->wariant3 == null) {
+            $wariant->wariant3 = null;
+        }else if(strpos($item->wariant3, '|')){
+            $war = $item->wariant3;
+            for ($i=0; $i < (substr_count($item->wariant3, '|')+1); $i++) { 
+                $pos = strpos($war, '|'); 
+                if($pos === false){
+                    $text[] = substr($war, 0);
+                    $war = substr_replace($war, '', 0, $pos+1);
+                }else {
+                    $text[] = substr($war, 0, $pos);
+                    $war = substr_replace($war, '', 0, $pos+1);
+                }
+            }
+            $wariant->wariant3 = $text;
+        }else {
+            $wariant->wariant3 = $item->wariant3;
+        }
+
+        $size = 0;
+        if($item->wariant1 != null){
+            $size = substr_count($item->wariant1, '|')+1;
+        }
+        if ($item->wariant2 != null) {
+            if (substr_count($item->wariant2, '|')+1 > $size) {
+                $size = substr_count($item->wariant2, '|')+1;
+            }
+        }
+        if ($item->wariant3 != null) {
+            if (substr_count($item->wariant3, '|')+1 > $size) {
+                $size =substr_count($item->wariant3, '|')+1;
+            }
+        }
+        
+        $wariantySize[] = $size;
+        $warianty[] = $wariant; 
+    }
+
+
+
 ?>
+
+
 
 @extends('layouts.nav')
 
@@ -26,16 +108,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-<link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />
-<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />
 <section class="container mb-5 mt-5">
+
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-inline-block my-5 px-4">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+    </div>
+    @endif
 
     <h1 class="font-weight-bold text-center mb-3 font-italic" style="font-family: 'Lora', serif;"> SZKOLENIA </h1>
 
-    <h4 class="text-center mb-5" style="font-family: 'Lora', serif;"> Projekt kultura oferuje kursy szkoleniowe
-        pozwalające na poszerzenie wiedzy w
-        dziedzinie
-        ...
+    <h4 class="text-center mb-5" style="font-family: 'Lora', serif;"> Stowarzyszenie Inicjatyw Społecznych „PROJEKT
+        KULTURA” zaprasza do udziału w
+        szkoleniach dla kadr kultury i organizacji pozarządowych.
     </h4>
 
     @if ($mainVideo)
@@ -47,7 +133,6 @@
                 disablePictureInPicture poster='{{ asset('/graphics/Logo.png') }}'
                 src="{{ asset('/graphics/szkoleniaReklama.mp4') }}" type="video/mp4">
             </video>
-            <p class="text-center font-weight-bold" style="font-size: 19px"> Nasza działalność </p>
         </div>
 
     </div>
@@ -65,10 +150,10 @@
     </h1>
 
     @foreach ($kursy as $item)
-    <div class="lesson">
-        <h3 class="font-weight-bold mb-0" style="font-family: 'Bitter', serif;"> {{ $item->nazwa }}
-        </h3>
-        <div class="row align-items-middle pt-5">
+    <div class="lesson pt-3">
+        <h2 class="font-weight-bold mb-0" style="font-family: 'Bitter', serif;"> {{ $item->nazwa }}
+        </h2>
+        <div class="row align-items-middle pt-3">
             <div class="col-md-8 col-12 pl-md-4 pl-3 align-self-center">
                 <div style="font-size: 20px;"> <span class="font-weight-bold"> Czas kursu (h):
                     </span>
@@ -81,14 +166,11 @@
                         @endif
 
                     </span> </div>
-                <p class="text-dark mt-2 mb-1"> <span class="font-weight-bold" style="font-size: 18px;"> Ostatnia
-                        aktualizacja:</span>
-                    {{ date('Y-m-d', strtotime($item->aktualizacja)) }} </p>
             </div>
 
             <div class="col-md-4 col-12">
                 <div class="row">
-                    <h3 class="font-weight-bold text-success text-center col-12" style="font-size: 30px;">
+                    <h3 class="font-weight-bold text-success text-center col-12 pt-3 pt-sm-0" style="font-size: 30px;">
                         {{ $item->cena }} zł
                     </h3>
                     <a href="{{ url('/zakup'.'/'.$item->nazwa) }}" id="buy"
@@ -100,7 +182,7 @@
         </div>
 
 
-        <div id="plusy" class="mt-5">
+        <div id="plusy" class="mt-3">
             <h3 class="font-weight-bold mb-3" style="font-family: 'Bitter', serif;"> Czego się nauczysz? </h3>
             <div class="pl-3">
                 @for ($i = 0; $i < count($nauczysz[$loop->index]); $i++)
@@ -141,11 +223,25 @@
                         </h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item font-weight-normal text-center">Kurs w postaci filmu</li>
-                            <li class="list-group-item font-weight-normal text-center"> X </li>
-                            <li class="list-group-item font-weight-normal text-center"> X </li>
-                            <li class="list-group-item text-center text-danger"
-                                style="font-size: 22px; font-family: 'Bitter', serif;">
-                                {{ $item->cena }} zł </li>
+                            @if ($item->wariant1 == null)
+                            @for ($i = 0; $i < $wariantySize[$loop->index]; $i++)
+                                <li class="list-group-item font-weight-normal text-center"> X </li>
+                                @endfor
+                                @elseif (strpos($item->wariant1, '|'))
+                                @for ($i = 0; $i < count($warianty[$loop->index]->wariant1); $i++) <li
+                                        class="list-group-item font-weight-normal text-center">
+                                        {{ $warianty[$loop->index]->wariant1[$i] }} </li>
+                                    @endfor
+                                    @else
+                                    <li class="list-group-item font-weight-normal text-center"> {{ $item->wariant1 }}
+                                    </li>
+                                    @for ($i = 0; $i < $wariantySize[$loop->index]-1; $i++)
+                                        <li class="list-group-item font-weight-normal text-center"> X </li>
+                                        @endfor
+                                        @endif
+                                        <li class="list-group-item text-center text-danger"
+                                            style="font-size: 22px; font-family: 'Bitter', serif;">
+                                            {{ $item->cena }} zł </li>
                         </ul>
                         <div class="bg-danger h-100">
                             <a href="{{ url('/zakup'.'/'.$item->nazwa) }}"
@@ -164,12 +260,25 @@
                         </h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item font-weight-normal text-center">Kurs w postaci filmu</li>
-                            <li class="list-group-item font-weight-normal text-center"> Odpowiedź na 3 dodatkowe pytania
-                            </li>
-                            <li class="list-group-item font-weight-normal text-center"> X </li>
-                            <li class="list-group-item text-center text-danger"
-                                style="font-size: 22px; font-family: 'Bitter', serif;">
-                                {{ $item->cena2 }} zł </li>
+                            @if ($item->wariant2 == null)
+                            @for ($i = 0; $i < $wariantySize[$loop->index]; $i++)
+                                <li class="list-group-item font-weight-normal text-center"> X </li>
+                                @endfor
+                                @elseif (strpos($item->wariant2, '|'))
+                                @for ($i = 0; $i < count($warianty[$loop->index]->wariant2); $i++) <li
+                                        class="list-group-item font-weight-normal text-center">
+                                        {{ $warianty[$loop->index]->wariant2[$i] }} </li>
+                                    @endfor
+                                    @else
+                                    <li class="list-group-item font-weight-normal text-center"> {{ $item->wariant2 }}
+                                    </li>
+                                    @for ($i = 0; $i < $wariantySize[$loop->index]-1; $i++)
+                                        <li class="list-group-item font-weight-normal text-center"> X </li>
+                                        @endfor
+                                        @endif
+                                        <li class="list-group-item text-center text-danger"
+                                            style="font-size: 22px; font-family: 'Bitter', serif;">
+                                            {{ $item->cena2 }} zł </li>
                         </ul>
                         <div class="bg-danger h-100">
                             <a href="{{ url('/zakup'.'/'.$item->nazwa) }}"
@@ -187,13 +296,26 @@
                         </h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item font-weight-normal text-center">Kurs w postaci filmu</li>
-                            <li class="list-group-item font-weight-normal text-center"> Odpowiedź na 3 dodatkowe pytania
                             </li>
-                            <li class="list-group-item font-weight-normal text-center"> Szczegółowa analiza wniosku
-                            </li>
-                            <li class="list-group-item text-center text-danger"
-                                style="font-size: 22px; font-family: 'Bitter', serif;">
-                                {{ $item->cena3 }} zł </li>
+                            @if ($item->wariant3 == null)
+                            @for ($i = 0; $i < $wariantySize[$loop->index]; $i++)
+                                <li class="list-group-item font-weight-normal text-center"> X </li>
+                                @endfor
+                                @elseif (strpos($item->wariant3, '|'))
+                                @for ($i = 0; $i < count($warianty[$loop->index]->wariant3); $i++) <li
+                                        class="list-group-item font-weight-normal text-center">
+                                        {{ $warianty[$loop->index]->wariant3[$i] }} </li>
+                                    @endfor
+                                    @else
+                                    <li class="list-group-item font-weight-normal text-center"> {{ $item->wariant3 }}
+                                    </li>
+                                    @for ($i = 0; $i < $wariantySize[$loop->index]-1; $i++)
+                                        <li class="list-group-item font-weight-normal text-center"> X </li>
+                                        @endfor
+                                        @endif
+                                        <li class="list-group-item text-center text-danger"
+                                            style="font-size: 22px; font-family: 'Bitter', serif;">
+                                            {{ $item->cena3 }} zł </li>
                         </ul>
                         <div class="bg-danger h-100">
                             <a href="{{ url('/zakup'.'/'.$item->nazwa) }}"
@@ -211,6 +333,7 @@
 
             <form action="{{ url('/szkolenia/checkKey') }}" method="POST" class="form-inline mt-2 mb-1">
                 @csrf
+                <input type="hidden" name="name" value="{{$item->nazwa}}">
                 <div class="form-group">
                     <input type="text" name="key" class="form-control" id="exampleInputEmail1"
                         placeholder="Klucz dostępu">
@@ -218,12 +341,7 @@
 
                 <button class="btn btn-success ml-4" style="font-family: 'Bitter', serif;"> Zatwierdź </button>
             </form>
-            @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-inline-block my-3 px-4">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
-            </div>
-            @endif
+
             <small class="form-text text-muted mb-4"> Za pomocą klucza dostępu możliwe jest korzystanie z filmów
                 szkoleniowych
                 Projekt kultura. </small>
@@ -234,6 +352,7 @@
         <hr class="mb-5 mt-5">
         @endif
         @endforeach
+
 
 </section>
 
